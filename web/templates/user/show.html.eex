@@ -1,0 +1,10 @@
+<h1><%= render "user.html", user: @user %></h1>
+
+<table class="table">
+  <tr><td><b>ID:</b> <%= @user.id %></td></tr>
+  <tr><td><b>First name:</b> <%= first_name(@user) %></b></td></tr>
+  <tr><td><b>Surname:</b> <%= surname(@user) %></b></td></tr>
+  <tr><td><b>Username:</b> <%= @user.username %></b></td></tr>
+  <tr><td><%= link "All", to: user_path(@conn, :index) %></td></tr>
+  </tr>
+</table>
