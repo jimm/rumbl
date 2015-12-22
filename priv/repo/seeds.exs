@@ -1,11 +1,9 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Rumbl.Repo.insert!(%SomeModel{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias Rumbl.Repo
+alias Rumbl.Category
+
+for category <- ~w(Action Drama Romance Comedy Sci-Fi Music) do
+  cs = %Category{} |> Category.changeset(%{name: category})
+  unless cs.errors do
+    Repo.insert! cs
+  end
+end

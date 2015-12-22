@@ -33,7 +33,7 @@ defmodule Rumbl.VideoControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    video = Repo.insert! %Video{}
+    video = Repo.insert! video_of_current_user(conn)
     conn = get conn, video_path(conn, :show, video)
     assert html_response(conn, 200) =~ "Show video"
   end
@@ -45,28 +45,33 @@ defmodule Rumbl.VideoControllerTest do
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    video = Repo.insert! %Video{}
+    video = Repo.insert! video_of_current_user(conn)
     conn = get conn, video_path(conn, :edit, video)
     assert html_response(conn, 200) =~ "Edit video"
   end
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    video = Repo.insert! %Video{}
+    video = Repo.insert! video_of_current_user(conn)
     conn = put conn, video_path(conn, :update, video), video: @valid_attrs
     assert redirected_to(conn) == video_path(conn, :show, video)
     assert Repo.get_by(Video, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    video = Repo.insert! %Video{}
+    video = Repo.insert! video_of_current_user(conn)
     conn = put conn, video_path(conn, :update, video), video: @invalid_attrs
     assert html_response(conn, 200) =~ "Edit video"
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    video = Repo.insert! %Video{}
+    video = Repo.insert! video_of_current_user(conn)
     conn = delete conn, video_path(conn, :delete, video)
     assert redirected_to(conn) == video_path(conn, :index)
     refute Repo.get(Video, video.id)
+  end
+
+  defp video_of_current_user(conn) do
+    conn.assigns.current_user
+    |> build(:videos)
   end
 end
