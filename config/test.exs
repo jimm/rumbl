@@ -18,6 +18,6 @@ config :rumbl, Rumbl.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-# When testing ONLY, reduce the number of bcrypt passes
-config :comeonin,
-  :bcrypt_log_rounds, 4
+# When testing ONLY, reduce the number of crypto passes
+config :comeonin, :bcrypt_log_rounds, 4
+config :comeonin, :pbkdf2_rounds, 1

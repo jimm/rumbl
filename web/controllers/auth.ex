@@ -39,8 +39,6 @@ defmodule Rumbl.Auth do
     repo = Keyword.fetch!(opts, :repo)
     user = repo.get_by(Rumbl.User, username: username)
     if user do
-      IO.puts pass               # DEBUG
-      IO.puts user.password_hash # DEBUG
       if checkpw(pass, user.password_hash) do
         {:ok, login(conn, user)}
       else
@@ -58,7 +56,7 @@ defmodule Rumbl.Auth do
   end
 
   def authenticate_user(conn, _opts) do
-    if conn.assigns.current_user do
+    if conn.assigns[:current_user] do
       conn
     else
       conn

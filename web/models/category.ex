@@ -10,6 +10,10 @@ defmodule Rumbl.Category do
   @required_fields ~w(name)
   @optional_fields ~w()
 
+  def alphabetical(query \\ __MODULE__) do
+    from c in query, order_by: c.name
+  end
+
   @doc """
   Creates a changeset based on the `model` and `params`.
 
