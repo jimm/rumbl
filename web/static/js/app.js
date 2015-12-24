@@ -19,3 +19,14 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+
+import Player from "./player"
+let video = document.getElementById("video");
+if (video) {
+  console.log("have video, initializing player")
+  Player.init(video.id, video.getAttribute("data-player-id"))
+}
+else {
+  console.log("no video found!")
+}
+  

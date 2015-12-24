@@ -15,13 +15,13 @@
 <%= for video <- @videos do %>
     <tr>
       <td><%= video.user_id %></td>
-      <td><%= link truncated_url(video.url), to: video.url %></td>
+      <td><%= truncated_url(video.url) %></td>
       <td><%= video.title %></td>
       <td><%= video.description %></td>
       <td><%= if video.category_id do video.category.name else "" end %></td>
 
       <td class="text-right">
-        <%= link "Show", to: video_path(@conn, :show, video), class: "btn btn-default btn-xs" %>
+        <%= link "Watch", to: watch_path(@conn, :show, video), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: video_path(@conn, :edit, video), class: "btn btn-default btn-xs" %>
         <%= link "Delete", to: video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
