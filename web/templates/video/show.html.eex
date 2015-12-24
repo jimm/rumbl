@@ -9,7 +9,7 @@
 
   <li>
     <strong>URL:</strong>
-    <%= @video.url %>
+    <%= link @video.url, to: @video.url %>
   </li>
 
   <li>
@@ -20,6 +20,11 @@
   <li>
     <strong>Description:</strong>
     <%= @video.description %>
+  </li>
+
+  <li>
+    <strong>Category:</strong>
+    <%= if @video.category_id do @video.category.name else "" end %>
   </li>
 
 </ul>

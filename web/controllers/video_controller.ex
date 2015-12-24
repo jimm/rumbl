@@ -12,7 +12,7 @@ defmodule Rumbl.VideoController do
   end
 
   def index(conn, _params, user) do
-    videos = Repo.all(user_videos(user))
+    videos = Repo.all(user_videos(user)) |> Repo.preload(:category)
     render(conn, "index.html", videos: videos)
   end
 
@@ -41,18 +41,18 @@ defmodule Rumbl.VideoController do
   end
 
   def show(conn, %{"id" => id}, user) do
-    video = Repo.get!(user_videos(user), id)
+    video = Repo.get!(user_videos(user), id) |> Repo.preload(:category)
     render(conn, "show.html", video: video)
   end
 
   def edit(conn, %{"id" => id}, user) do
-    video = Repo.get!(user_videos(user), id)
+    video = Repo.get!(user_videos(user), id) |> Repo.preload(:category)
     changeset = Video.changeset(video)
     render(conn, "edit.html", video: video, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "video" => video_params}, user) do
-    video = Repo.get!(user_videos(user), id)
+    video = Repo.get!(user_videos(user), id) |> Repo.preload(:category)
     changeset = Video.changeset(video, video_params)
 
     case Repo.update(changeset) do
