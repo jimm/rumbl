@@ -2,7 +2,6 @@ let Player = {
   player: null,
 
   init(domId, playerId) {
-    console.log("Player.init")  // DEBUG
     window.onYouTubeIframeAPIReady = () => this.onIframeReady(domId, playerId)
     let youtubeScriptTag = document.createElement("script")
     youtubeScriptTag.src = "//www.youtube.com/iframe_api"
@@ -10,7 +9,6 @@ let Player = {
   },
 
   onIframeReady(domId, playerId) {
-    console.log("Player.onIframeReady") // DEBUG
     this.player = new YT.Player(domId, {
       height: "360",
       width: "420",
@@ -29,4 +27,3 @@ let Player = {
   seekTo(millisec) { return this.player.seekTo(millisec / 1000) }
 }
 export default Player
-
