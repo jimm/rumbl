@@ -16,7 +16,7 @@
 <%= for video <- @videos do %>
     <tr>
       <td><%= video.user_id %></td>
-      <td><%= truncated_url(video.url) %></td>
+      <td><%= truncate(video.url) %></td>
       <td><%= video.title %></td>
       <td><%= video.slug %></td>
       <td><%= video.description %></td>
