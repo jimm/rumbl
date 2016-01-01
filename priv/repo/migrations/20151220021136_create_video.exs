@@ -5,7 +5,7 @@ defmodule Rumbl.Repo.Migrations.CreateVideo do
     create table(:videos) do
       add :url, :string
       add :title, :string
-      add :slug, :string, null: false
+      add :slug, :string
       add :description, :text
       add :user_id, references(:users)
 

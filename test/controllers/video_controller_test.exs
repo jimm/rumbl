@@ -2,7 +2,8 @@ defmodule Rumbl.VideoControllerTest do
   use Rumbl.ConnCase
 
   alias Rumbl.Video
-  @valid_attrs %{description: "some content", title: "some content", url: "some content"}
+  @valid_attrs %{description: "some content", title: "some content",
+                 url: "some content"}
   @invalid_attrs %{title: "invalid"}
 
   setup %{conn: conn} = config do
@@ -82,6 +83,11 @@ defmodule Rumbl.VideoControllerTest do
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
     video = Repo.insert! video_of_current_user(conn)
     conn = put conn, video_path(conn, :update, video), video: @valid_attrs
+IO.puts "redir to = #{redirected_to(conn)}"
+IO.puts "video_path #{video_path(conn, :show, video)}"
+# FIXME: This should pass because in the controller video_path is correct.
+#        Here, video_path is generating the wrong value. The slug it
+#        generates is wrong.
     assert redirected_to(conn) == video_path(conn, :show, video)
     assert Repo.get_by(Video, @valid_attrs)
   end

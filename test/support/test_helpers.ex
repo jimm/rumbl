@@ -13,8 +13,12 @@ defmodule Rumbl.TestHelpers do
   end
 
   def insert_video(user, attrs \\ %{}) do
+    # Duplicates Video.slugify code, but that is private
+    default_slug = attrs[:title]
+    |> String.downcase
+    |> String.replace(~r/[^\w-]+/, "-")
     user
-    |> Ecto.Model.build(:videos, attrs)
+    |> Ecto.Model.build(:videos, Dict.merge(%{slug: default_slug}, attrs))
     |> Repo.insert!()
   end
 end

@@ -14,8 +14,8 @@ defmodule Rumbl.Video do
     timestamps
   end
 
-  @required_fields ~w(url title description user_id slug)
-  @optional_fields ~w(category_id)
+  @required_fields ~w(url title user_id)
+  @optional_fields ~w(slug description category_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

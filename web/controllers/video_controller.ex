@@ -57,6 +57,8 @@ defmodule Rumbl.VideoController do
 
     case Repo.update(changeset) do
       {:ok, video} ->
+IO.puts "video path in controller:" # DEBUG
+IO.inspect video_path(conn, :show, video) # DEBUG
         conn
         |> put_flash(:info, "Video updated successfully.")
         |> redirect(to: video_path(conn, :show, video))
