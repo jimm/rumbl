@@ -2,8 +2,9 @@ defmodule Rumbl.VideoView do
   use Rumbl.Web, :view
 
   def truncate(url, maxlen \\ 30) do
-    if String.length(url) > maxlen do
-      String.slice(url, 0, maxlen) <> "..."
+    truncated = String.slice(url, 0, maxlen)
+    if truncated != url do
+      truncated <> "..."
     else
       url
     end

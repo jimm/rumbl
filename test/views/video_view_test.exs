@@ -23,4 +23,10 @@ defmodule Rumbl.VideoViewTest do
 
     assert String.contains?(content, "New video")
   end
+
+  test "truncate", _ do
+    s = "abcdefg"
+    trunc = Rumbl.VideoView.truncate(s, 3)
+    assert trunc == "abc..."
+  end
 end
