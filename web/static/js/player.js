@@ -20,7 +20,7 @@ let Player = {
     })
   },
 
-  onPlayerReady(event) { /* this.player.playVideo() */ },
+  onPlayerReady(event) { this.player.playVideo() },
 
   onPlayerStateChange(event) { },
   getCurrentTime() { return Math.floor(this.player.getCurrentTime() * 1000) },
