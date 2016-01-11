@@ -7,7 +7,7 @@ defmodule Rumbl.VideoChannel do
 
   def handle_in("new_annotation", params, socket) do
     broadcast! socket, "new_annotation", %{
-      user: %{username: "anon"},
+      user: %{username: socket.assigns.current_user.username},
       body: params["body"],
       at: params["at"]
     }
