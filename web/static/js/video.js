@@ -16,7 +16,7 @@ let Video = {
     let vidChannel = socket.channel("videos:" + videoId)
 
     postButton.addEventListener("click", e => {
-      let payload = {body: msgInput.value, at: new Date()}// Player.getCurrentTime()}
+      let payload = {body: msgInput.value, at: Player.getCurrentTime()}
       vidChannel.push("new_annotation", payload)
         .receive("error", e => console.log(e))
       msgInput.value = ""
